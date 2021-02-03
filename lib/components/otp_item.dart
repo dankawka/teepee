@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
 
 class OtpItem extends StatelessWidget {
   @override
@@ -14,6 +15,7 @@ class OtpItem extends StatelessWidget {
             backgroundColor: Color.fromRGBO(38, 39, 54, 1),
             textColor: Colors.white,
             fontSize: 16);
+        Clipboard.setData(new ClipboardData(text: "your text"));
       },
       child: Container(
         padding: const EdgeInsets.all(16),
