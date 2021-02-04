@@ -18,15 +18,22 @@ class OtpItem extends StatelessWidget {
         Clipboard.setData(new ClipboardData(text: "your text"));
       },
       child: Container(
+        margin: const EdgeInsets.fromLTRB(16, 10, 16, 10),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              new BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.5),
+                  offset: new Offset(3, 3),
+                  blurRadius: 5)
+            ],
+            borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
                 colors: [
-                  Color.fromRGBO(142, 45, 226, 1),
-                  Color.fromRGBO(74, 0, 224, 1)
+                  Color.fromRGBO(101, 78, 163, 1),
+                  Color.fromRGBO(234, 175, 200, 1),
                 ])),
         child: Column(
           children: [

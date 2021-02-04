@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromRGBO(30, 30, 42, 1),
+        scaffoldBackgroundColor: const Color.fromRGBO(51, 44, 105, 1),
         brightness: Brightness.dark,
         primaryColor: Colors.lightBlue[800],
-        accentColor: Colors.cyan[600],
+        accentColor: Colors.black87,
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
