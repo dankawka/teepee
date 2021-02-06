@@ -24,6 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   fluttertoast: ^7.1.6
+  circular_countdown: ^1.2.1
+  otp: 2.2.3
+  get_it: ^5.0.6
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -46,6 +49,11 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: fonts/Montserrat-Bold.ttf
+    - family: OpenSans
+      fonts:
+        - asset: fonts/OpenSans-Regular.ttf
+        - asset: fonts/OpenSans-Bold.ttf
+          weight: 700
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
