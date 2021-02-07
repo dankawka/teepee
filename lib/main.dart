@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teepee/screens/dashboard.dart';
+import 'package:teepee/screens/qr_code_scanner.dart';
 import 'package:teepee/service_locator.dart';
 
 void main() {
@@ -33,7 +34,11 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: DashboardScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => DashboardScreen(),
+        '/scanner': (context) => QrCodeScannerScreen(),
+      },
     );
   }
 }

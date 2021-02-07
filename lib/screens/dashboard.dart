@@ -44,7 +44,7 @@ class DashboardScreen extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                print(":das");
+                                Navigator.pushNamed(context, '/scanner');
                               },
                               child: Container(
                                   padding: const EdgeInsets.all(10),
