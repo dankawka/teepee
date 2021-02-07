@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teepee/components/default_scaffold.dart';
-import 'package:teepee/services/qr_code_scanner.dart';
+import 'package:teepee/components/qr_code_scanner.dart';
 
 class QrCodeScannerScreen extends StatelessWidget {
   @override
@@ -14,7 +14,7 @@ class QrCodeScannerScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      child: QRViewExample(),
+                      child: QRViewComponent(),
                     ),
                   )
                 ],

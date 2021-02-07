@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:teepee/components/default_scaffold.dart';
 import 'package:teepee/components/otp_item.dart';
+import 'package:teepee/core/repositories/entries_repository.dart';
+
+import '../service_locator.dart';
 
 class DashboardScreen extends StatelessWidget {
+  final repo = getIt<EntriesRepository>();
+
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(

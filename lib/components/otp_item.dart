@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'package:circular_countdown/circular_countdown.dart';
-import 'package:teepee/services/otp_service.dart';
+import 'package:teepee/core/services/otp_service.dart';
 
 import '../service_locator.dart';
 

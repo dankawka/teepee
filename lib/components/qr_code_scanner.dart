@@ -3,12 +3,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:teepee/core/repositories/entries_repository.dart';
+import 'package:teepee/core/services/otpauth_parser.dart';
 
-class _QRViewExampleState extends State<QRViewExample> {
+import '../service_locator.dart';
+
+class _QRViewState extends State<QRViewComponent> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   var isFlashOn = false;
   Barcode result;
   QRViewController controller;
+  final entriesRepository = getIt<EntriesRepository>();
+  final otpAuthParserService = getIt<OtpAuthParser>();
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -24,8 +30,6 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   @override
   Widget build(BuildContext context) {
-    final scanArea = (MediaQuery.of(context).size.width < 400 ||
-        MediaQuery.of(context).size.height < 400);
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -67,15 +71,6 @@ class _QRViewExampleState extends State<QRViewExample> {
               ],
             ),
           ),
-          // Expanded(
-          //   flex: 1,
-          //   child: Center(
-          //     child: (result != null)
-          //         ? Text(
-          //             'Barcode Type: ${describeEnum(result.format)}   Data: ${result.code}')
-          //         : Text('Scan a code'),
-          //   ),
-          // )
         ],
       ),
     );
@@ -88,14 +83,18 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        if (otpAuthParserService.isValid(result.toString())) {
+          final parsed = otpAuthParserService.parse(result.toString());
+          entriesRepository.insert(parsed);
+        }
       });
     });
   }
 }
 
-class QRViewExample extends StatefulWidget {
+class QRViewComponent extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _QRViewExampleState();
+    return _QRViewState();
   }
 }
