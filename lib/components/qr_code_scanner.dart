@@ -83,9 +83,14 @@ class _QRViewState extends State<QRViewComponent> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-        if (otpAuthParserService.isValid(result.toString())) {
-          final parsed = otpAuthParserService.parse(result.toString());
-          entriesRepository.insert(parsed);
+        try {
+          final asString = result.code;
+          if (otpAuthParserService.isValid(asString)) {
+            final parsed = otpAuthParserService.parse(asString);
+            entriesRepository.insert(parsed);
+          }
+        } catch (e) {
+          print("Failed XD");
         }
       });
     });

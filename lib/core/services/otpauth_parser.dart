@@ -29,7 +29,7 @@ class OtpAuthParser {
     }
   }
 
-  OtpAuth parse(otpauth) {
+  OtpAuth parse(String otpauth) {
     Uri _parsed;
 
     String type;
@@ -40,43 +40,47 @@ class OtpAuthParser {
     String digits;
     String period;
 
-    _parsed = Uri.parse(otpauth);
+    try {
+      _parsed = Uri.parse(otpauth);
 
-    type = _parsed.host;
-    label = _parsed.pathSegments[0];
-    _parsed.queryParameters.forEach((k, v) {
-      switch (k) {
-        case 'secret':
-          {
-            secret = v;
-            break;
-          }
-        case 'issuer':
-          {
-            issuer = v;
-            break;
-          }
-        case 'algorithm':
-          {
-            algorithm = v;
-            break;
-          }
-        case 'period':
-          {
-            period = v;
-            break;
-          }
-      }
-    });
+      type = _parsed.host;
+      label = _parsed.pathSegments[0];
+      _parsed.queryParameters.forEach((k, v) {
+        switch (k) {
+          case 'secret':
+            {
+              secret = v;
+              break;
+            }
+          case 'issuer':
+            {
+              issuer = v;
+              break;
+            }
+          case 'algorithm':
+            {
+              algorithm = v;
+              break;
+            }
+          case 'period':
+            {
+              period = v;
+              break;
+            }
+        }
+      });
 
-    return OtpAuth(
-        otpauth: otpauth,
-        algorithm: algorithm,
-        digits: digits,
-        issuer: issuer,
-        label: label,
-        period: period,
-        secret: secret,
-        type: type);
+      return OtpAuth(
+          otpauth: otpauth,
+          algorithm: algorithm,
+          digits: digits,
+          issuer: issuer,
+          label: label,
+          period: period,
+          secret: secret,
+          type: type);
+    } catch (e) {
+      throw "Failed to parse qrcode";
+    }
   }
 }

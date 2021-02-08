@@ -24,8 +24,15 @@ class EntriesRepository {
       print("Already exists!");
       return false;
     }
-    _database.entriesBox.put(asString, otpAuth.otpauth);
+
+    final val = otpAuth.otpauth;
+    print("Inserting $val");
+    _database.entriesBox.put(asString, val);
     print("Added new!");
     return true;
+  }
+
+  getAll() {
+    return _database.entriesBox.toMap();
   }
 }

@@ -34,6 +34,9 @@ class Database {
 
     entriesBox = await Hive.openBox('entries',
         encryptionCipher: HiveAesCipher(encryptionKey));
+
+    entriesBox.toMap().forEach((k, v) => print('${k}: ${v.toString()}'));
+
     appSettingsBox = await Hive.openBox('app_settings');
   }
 }

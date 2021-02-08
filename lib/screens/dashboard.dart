@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:teepee/components/default_scaffold.dart';
+import 'package:teepee/components/entries_list.dart';
 import 'package:teepee/components/otp_item.dart';
 import 'package:teepee/core/repositories/entries_repository.dart';
 
@@ -29,11 +31,7 @@ class DashboardScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                      child: ListView(
-                        children: [
-                          OtpItem(),
-                        ],
-                      ),
+                      child: EntriesList(),
                     ),
                   ),
                   Stack(

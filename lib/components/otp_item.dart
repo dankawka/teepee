@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'package:circular_countdown/circular_countdown.dart';
 import 'package:teepee/core/services/otp_service.dart';
+import 'package:teepee/core/services/otpauth_parser.dart';
 
 import '../service_locator.dart';
 
@@ -35,7 +36,7 @@ class _OtpItemState extends State<OtpItem> {
     final now = DateTime.now();
     final nowInMs = now.millisecondsSinceEpoch;
     final nowInS = (nowInMs / 1000).round();
-    final code = otpService.generateCode("JBSWY3DPEHPK3PXP", nowInMs);
+    final code = otpService.generateCode(widget.otpauth.secret, nowInMs);
     final time_remaining = 30 - nowInS % 30;
 
     setState(() {
@@ -60,6 +61,7 @@ class _OtpItemState extends State<OtpItem> {
   @override
   Widget build(BuildContext context) {
     return _OtpItem(
+      label: widget.otpauth.label,
       timeLeft: _timeLeft,
       code: _code,
     );
@@ -67,6 +69,9 @@ class _OtpItemState extends State<OtpItem> {
 }
 
 class OtpItem extends StatefulWidget {
+  final OtpAuth otpauth;
+
+  const OtpItem({Key key, this.otpauth}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _OtpItemState();
@@ -76,8 +81,10 @@ class OtpItem extends StatefulWidget {
 class _OtpItem extends StatelessWidget {
   final int timeLeft;
   final String code;
+  final String label;
 
-  const _OtpItem({Key key, this.timeLeft, this.code}) : super(key: key);
+  const _OtpItem({Key key, this.timeLeft, this.code, this.label})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -113,7 +120,7 @@ class _OtpItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Github",
+                      label,
                       style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 0.7),
                           fontFamily: 'Staatliches',

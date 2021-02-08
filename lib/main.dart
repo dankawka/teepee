@@ -3,14 +3,32 @@ import 'package:teepee/screens/dashboard.dart';
 import 'package:teepee/screens/qr_code_scanner.dart';
 import 'package:teepee/service_locator.dart';
 
+import 'core/repositories/entries_repository.dart';
+import 'core/services/otpauth_parser.dart';
+import 'core/stores/entries.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setup();
   runApp(MyApp());
 }
 
+void hydrateStores() {
+  final entriesStore = getIt.get<EntriesStore>();
+  final entriesRepository = getIt.get<EntriesRepository>();
+  final otpAuthParserService = getIt<OtpAuthParser>();
+
+  final allEntries = entriesRepository.getAll();
+  allEntries.forEach((k, v) {
+    print("adding $v");
+    final parsed = otpAuthParserService.parse(v);
+    entriesStore.add(parsed);
+  });
+}
+
 Future<void> appInit() async {
   await getIt.allReady();
+  hydrateStores();
   return true;
 }
 
