@@ -1,4 +1,5 @@
 class OtpAuth {
+  String id;
   final String type;
   final String label;
   final String secret;
@@ -9,7 +10,8 @@ class OtpAuth {
   final String otpauth;
 
   OtpAuth(
-      {this.otpauth = '',
+      {this.id,
+      this.otpauth = '',
       this.type = 'totp',
       this.label,
       this.secret,
@@ -17,6 +19,10 @@ class OtpAuth {
       this.algorithm = 'SHA1',
       this.digits = '6',
       this.period = '30'});
+
+  void setId(String newId) {
+    id = newId;
+  }
 }
 
 class OtpAuthParser {

@@ -10,29 +10,33 @@ final uuid = Uuid();
 
 class EntriesRepository {
   Database _database;
+  final otpAuthParserService = getIt<OtpAuthParser>();
 
   EntriesRepository() {
     _database = getIt<Database>();
   }
 
   bool insert(OtpAuth otpAuth) {
-    final bytes = utf8.encode(otpAuth.otpauth);
-    final digest = sha256.convert(bytes);
-    final asString = digest.toString();
+    final idAsBytes = utf8.encode(otpAuth.otpauth);
+    final hashedId = sha256.convert(idAsBytes);
+    final hashedIdAsString = hashedId.toString();
 
-    if (_database.entriesBox.containsKey(asString)) {
+    if (_database.entriesBox.containsKey(hashedIdAsString)) {
       print("Already exists!");
       return false;
     }
-
-    final val = otpAuth.otpauth;
-    print("Inserting $val");
-    _database.entriesBox.put(asString, val);
-    print("Added new!");
+    _database.entriesBox.put(hashedIdAsString, otpAuth.otpauth);
     return true;
   }
 
-  getAll() {
-    return _database.entriesBox.toMap();
+  List<OtpAuth> getAll() {
+    final List<OtpAuth> list = [];
+    final map = _database.entriesBox.toMap();
+    map.forEach((k, v) {
+      final el = otpAuthParserService.parse(v);
+      el.setId(k);
+      list.add(el);
+    });
+    return list;
   }
 }

@@ -30,12 +30,11 @@ class Database {
 
     final encryptionKey =
         base64Url.decode(await secureStorage.read(key: 'key'));
-    print('Encryption key: $encryptionKey');
 
     entriesBox = await Hive.openBox('entries',
         encryptionCipher: HiveAesCipher(encryptionKey));
 
-    entriesBox.toMap().forEach((k, v) => print('${k}: ${v.toString()}'));
+    entriesBox.clear();
 
     appSettingsBox = await Hive.openBox('app_settings');
   }

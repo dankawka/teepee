@@ -13,4 +13,19 @@ abstract class _EntriesStore with Store {
   void add(OtpAuth entry) {
     entries.add(entry);
   }
+
+  @action
+  void addAll(List<OtpAuth> newEntries) {
+    if (newEntries.length == 0) {
+      return;
+    }
+
+    final withoutDuplicates = newEntries.where((item) {
+      final itemId = item.id;
+      final exists = entries.any((existingItem) => existingItem.id == itemId);
+      return !exists;
+    });
+
+    entries.addAll(withoutDuplicates.toList());
+  }
 }
