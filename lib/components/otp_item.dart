@@ -120,17 +120,38 @@ class _OtpItem extends StatelessWidget {
                           fontFamily: 'OpenSans',
                           fontSize: 18),
                     ),
-                    Text(code,
-                        style: TextStyle(
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                            fontFamily: 'OpenSans',
-                            fontSize: 32))
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child: CircularCountdown(
+                            diameter: 26,
+                            countdownTotal: 30,
+                            countdownRemaining: timeLeft,
+                          ),
+                        ),
+                        Text(code.substring(0, 3) + " " + code.substring(3, 6),
+                            style: TextStyle(
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                                fontFamily: 'OpenSans',
+                                fontSize: 32))
+                      ],
+                    )
                   ],
                 ),
-                CircularCountdown(
-                  diameter: 40,
-                  countdownTotal: 30,
-                  countdownRemaining: timeLeft,
+                PopupMenuButton(
+                  itemBuilder: (BuildContext context) {
+                    return [
+                      const PopupMenuItem(
+                        value: "hello",
+                        child: Text('Edit'),
+                      ),
+                      const PopupMenuItem(
+                        value: "hello",
+                        child: Text('Remove'),
+                      ),
+                    ];
+                  },
                 )
               ],
             )
