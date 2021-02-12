@@ -56,6 +56,11 @@ flutter:
     - family: Staatliches
       fonts:
         - asset: fonts/Staatliches-Regular.ttf
+    - family: OpenSans
+      fonts:
+        - asset: fonts/OpenSans-Regular.ttf
+        - asset: fonts/OpenSans-Bold.ttf
+          weight: 700
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -34,8 +34,6 @@ class Database {
     entriesBox = await Hive.openBox('entries',
         encryptionCipher: HiveAesCipher(encryptionKey));
 
-    entriesBox.clear();
-
     appSettingsBox = await Hive.openBox('app_settings');
   }
 }

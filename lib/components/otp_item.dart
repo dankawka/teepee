@@ -91,14 +91,8 @@ class _OtpItem extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       decoration: BoxDecoration(
-          boxShadow: [
-            new BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.5),
-                offset: new Offset(3, 3),
-                blurRadius: 5)
-          ],
           borderRadius: BorderRadius.circular(16),
-          color: Color.fromRGBO(61, 90, 128, 1)),
+          color: Color.fromRGBO(20, 20, 20, 1)),
       child: InkWell(
         onTap: () {
           Fluttertoast.showToast(
@@ -123,18 +117,18 @@ class _OtpItem extends StatelessWidget {
                       label,
                       style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 0.7),
-                          fontFamily: 'Staatliches',
-                          fontSize: 24),
+                          fontFamily: 'OpenSans',
+                          fontSize: 18),
                     ),
                     Text(code,
                         style: TextStyle(
                             color: Color.fromRGBO(255, 255, 255, 1),
-                            fontFamily: 'Staatliches',
-                            fontSize: 42))
+                            fontFamily: 'OpenSans',
+                            fontSize: 32))
                   ],
                 ),
                 CircularCountdown(
-                  diameter: 52,
+                  diameter: 40,
                   countdownTotal: 30,
                   countdownRemaining: timeLeft,
                 )

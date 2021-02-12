@@ -25,8 +25,9 @@ class DashboardScreen extends StatelessWidget {
                     child: Text("Codes",
                         style: TextStyle(
                             color: Color.fromRGBO(255, 255, 255, 1),
-                            fontFamily: 'Staatliches',
-                            fontSize: 28)),
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18)),
                   ),
                   Expanded(
                     child: Container(
@@ -41,7 +42,10 @@ class DashboardScreen extends StatelessWidget {
                       Container(
                         height: 75,
                         decoration: const BoxDecoration(
-                            color: Color.fromRGBO(41, 50, 65, 1)),
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20))),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
